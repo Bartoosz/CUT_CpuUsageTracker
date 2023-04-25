@@ -1,4 +1,4 @@
-CFLAGS = 
+CFLAGS = -Wall -Wextra
 
 all: final
 

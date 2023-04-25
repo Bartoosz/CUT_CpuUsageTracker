@@ -81,18 +81,18 @@ void print_cpu_stats(cpu_stats *rawdata, uint8_t systemNumberOfCores)
     }
 }
 
-void * Reader(void *tid)
+void * Reader(void* arg)
 {
-    long * t_id = (long *) tid;
     systemNumberOfCores = sysconf(_SC_NPROCESSORS_ONLN);
     cpu_stats *rawdata = GetCpuTimeMemoryPool();
     if(rawdata == NULL)
     {
         printf("Msg: Error during MemoryPool allocation!\n");
-        return 0;
+        return arg;
     }
     read_cpu_stats(rawdata, systemNumberOfCores);
     print_cpu_stats(rawdata, systemNumberOfCores);
     DeallocateCpuTimeMemoryPool(rawdata);
+    return arg;
 }
 

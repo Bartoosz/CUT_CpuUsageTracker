@@ -5,10 +5,10 @@
 #include <pthread.h>
 #include "inc/reader.h"
 
-int main (void)
+int main()
 {
    pthread_t reader_thread;
-   pthread_create(&reader_thread, NULL, Reader, (void *) reader_thread);
+   pthread_create(&reader_thread, NULL, Reader, NULL);
    pthread_join(reader_thread, NULL);
   return 0;
 }

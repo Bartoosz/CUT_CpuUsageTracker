@@ -4,9 +4,6 @@
 #include <stdint.h>
 
 #define MAX_NUMBER_OF_CORES 32
-
-//typedef unsigned long long cputime_t;
-
 typedef struct cpuTimes_s
 {
     uint64_t user;
@@ -21,6 +18,6 @@ typedef struct cpuTimes_s
     uint64_t guest_nice;
 } cpu_stats;
 
-void * Reader(void *tid);
+void * Reader(void* arg);
 
 #endif
