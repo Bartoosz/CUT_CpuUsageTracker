@@ -1,10 +1,10 @@
-CFLAGS = -Wall -Wextra
+CFLAGS = -Wall -Wextra -pthread
 
 all: final
 
-final: main.o reader.o 
+final: main.o reader.o analyzer.o buffer.o
 	echo "linking and produce final app"
-	gcc $(CFLAGS) -pthread main.o reader.o -o final
+	gcc $(CFLAGS) main.o reader.o analyzer.o buffer.o -o final
 
 main.o: main.c
 	echo "compiling the main file"
@@ -14,10 +14,14 @@ reader.o: src/reader.c
 	echo "compiling the reader file"
 	gcc $(CFLAGS) -c src/reader.c
 
-logger.o: src/logger.c
-	echo "compiling the logger file"
-	gcc $(CFLAGS) -c src/logger.c
+analyzer.o: src/analyzer.c
+	echo "compiling the analyzer file"
+	gcc $(CFLAGS) -c src/analyzer.c
+
+buffer.o: src/buffer.c
+	echo "compiling the buffer file"
+	gcc $(CFLAGS) -c src/buffer.c
 
 clean:
 	echo "remove everything"
-	rm main.o reader.o final
+	rm main.o reader.o buffer.o analyzer.o final

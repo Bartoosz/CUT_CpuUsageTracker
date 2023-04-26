@@ -19,5 +19,8 @@ typedef struct cpuTimes_s
 } cpu_stats;
 
 void * Reader(void* arg);
-
+void print_cpu_stats(cpu_stats *rawdata, uint8_t systemNumberOfCores);
+void read_cpu_stats(cpu_stats *rawdata, uint8_t systemNumberOfCores);
+void DeallocateCpuTimeMemoryPool(cpu_stats *rawdata);
+cpu_stats* GetCpuTimeMemoryPool();
 #endif

@@ -6,11 +6,10 @@
 
 #define MAX_LINE_LENGTH 100
 
-uint8_t systemNumberOfCores = 0;
-
 //allocate memory for store raw data from file
 cpu_stats* GetCpuTimeMemoryPool()
 {
+    uint8_t systemNumberOfCores = sysconf(_SC_NPROCESSORS_ONLN);
     cpu_stats* cpuTimesArr = malloc(sizeof(cpu_stats) * systemNumberOfCores);
     if(cpuTimesArr == NULL)
     {
@@ -81,18 +80,4 @@ void print_cpu_stats(cpu_stats *rawdata, uint8_t systemNumberOfCores)
     }
 }
 
-void * Reader(void* arg)
-{
-    systemNumberOfCores = sysconf(_SC_NPROCESSORS_ONLN);
-    cpu_stats *rawdata = GetCpuTimeMemoryPool();
-    if(rawdata == NULL)
-    {
-        printf("Msg: Error during MemoryPool allocation!\n");
-        return arg;
-    }
-    read_cpu_stats(rawdata, systemNumberOfCores);
-    print_cpu_stats(rawdata, systemNumberOfCores);
-    DeallocateCpuTimeMemoryPool(rawdata);
-    return arg;
-}
 
